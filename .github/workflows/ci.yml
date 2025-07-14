@@ -67,4 +67,4 @@ jobs:
             docker run -d -p 5000:5000 --name entrytracker \
               372595555088.dkr.ecr.ap-south-1.amazonaws.com/entrytracker2:latest
 
-              ##
+              ###
