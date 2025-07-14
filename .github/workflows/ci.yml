@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,4 +18,17 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t entrytracker:test .
+
+      - name: Run container in background
+        run: |
+          docker run -d -p 5000:5000 --name entrytracker entrytracker:test
+          sleep 5  # wait for the app to boot
+
+      - name: Run curl test
+        run: curl -f http://localhost:5000
+
+      - name: Cleanup
+        run: |
+          docker stop entrytracker
+          docker rm entrytracker
 
